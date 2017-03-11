@@ -1,5 +1,4 @@
 const axios = require('axios');
-const foo = "foo";
 class Content {
   printArticles(data) {
       for (let item of data) {
