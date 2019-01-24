@@ -1,6 +1,20 @@
-const Content = require('./content');
-const content = new Content();
-const URL = "https://qiita.com/api/v2/items";
+const axios = require('axios');
+const url = "https://qiita.com/api/v2/items";
 
-// 記事を表示する
-content.getArticles(URL);
+async function main() {
+  try {
+    const res = await axios.get(url);
+    const items = res.data;
+    for (const item of items) {
+      console.log(`${item.user.id}: \t${item.title}`);
+    }
+  } catch (error) {
+    const {
+      status,
+      statusText
+    } = error.response;
+    console.log(`Error! HTTP Status: ${status} ${statusText}`);
+  }
+}
+
+main();
